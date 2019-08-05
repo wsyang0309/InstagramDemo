@@ -23,7 +23,7 @@ class PostListView(LoginRequiredMixin, ListView):
             following.add(conn.following)
         return Post.objects.filter(author__in=following)
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "post_detail.html"
 
