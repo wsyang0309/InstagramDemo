@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% comment %} {% load custom_tags %} {% endcomment %}
+
+
+{% block content %}
+
+<div class="row single-post">
+    <div class="single-post-card view-update {{ object.pk }}">
+        {% comment %} <div class="header">
+            <a href="{% url 'helloWorld'%}">
+                {% if object.author.profile_pic %}
+                    <img class="picture-circle--medium" src="http://{{ request.META.HTTP_HOST }}/{{object.author.profile_pic.url}}">
+                {% endif %}
+                {{ object.author.username }}
+            </a>
+        </div> {% endcomment %}
+        <div class="image__wrapper">
+            <img class="card__main-image" src="http://{{ request.META.HTTP_HOST }}/{{object.image}}" width='1000', height='1000'>
+        </div>
+        {% comment %} <div class="comments-portion">
+            <div class="likes">
+                {% if post.get_like_count %}
+                    {{ post.get_like_count }} like{% if post.get_like_count > 1 %}s{% endif %}
+                {% endif %}
+            </div>
+            <section class="input-row">
+                <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>    <!-- 需要自己创造template language   has_user_liked_post-->
+                <div class="hidden-data {{ post.pk }}" style="display: none;">  <!-- 命名信息的时候，把post.pk/ID也加上去-->
+                            <span class="post-pk">{{ post.pk }}</span>
+                </div>
+            </section>
+        </div> {% endcomment %}
+    </div>
+</div>
+
+{% endblock content %}

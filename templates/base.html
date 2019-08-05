@@ -1,0 +1,40 @@
+<!-- base.html是其他很多文件的base 因为很多代码可以重复利用 -->
+<html>
+    <!-- template语法 load定义的static的语法  为了能用相对路径static -->
+    {% load static %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 网页标签名称 -->
+        <title>Instagram Demo</title>
+        <!-- 引用bootstrap的CSS样式 -->
+        <!-- 相对路径从static开始  找static的folder 然后根据后面的url找到指定文件 -->
+        <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'vendor/font-awesome-4.6.3/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- 希望header在每个页面都能使用，相当于在别的文件能引用header.html内的语句 -->
+        <!-- include 方便管理代码, 引用header.html内所有内容，相当于copy了header.html内所有内容 -->
+        {% comment %} {% include 'header.html' %} {% endcomment %}
+        
+        
+        <div class="content-wrapper">
+            <div class="container">
+                <!-- content从引用base的页面里拿来  拿来的内容范围 是block 到 endblock中间的 -->
+                {% block content %}
+                {% endblock content%}
+            </div>
+        </div>
+
+        <script type="text/javascript" src="{% static 'js/jquery-3.1.0.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/ajax-csrf-auth.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+        {% block extrascript %}
+        {% endblock %}
+
+    </body>
+</html>
